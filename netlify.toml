@@ -1,0 +1,15 @@
+[[redirects]]
+    from = "/*"
+    to = "/"
+    status = 200
+
+[[redirects]]
+    from = "/check-redirect"
+    to = "/"
+    status = 302
+
+[[redirects]]
+    from = "/check-rewrite"
+    to = "/"
+    status = 200
+    
