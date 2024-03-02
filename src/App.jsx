@@ -1,21 +1,22 @@
+import { useLocation } from "react-router-dom";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-
-import Navbar from "./layouts/RootLayout";
-import Home from "./pages/web/Home";
-import ProductDetail from "./pages/web/ProductDetail";
+import AdminRoutes from "./routes/admin";
+import WebRoutes from "./routes/web";
+import { Toaster } from "react-hot-toast";
 
 function App() {
+    const { pathname } = useLocation();
+    const IS_ADMIN = pathname.includes("admin");
+
     return (
-        <Routes>
-            <Route path="/" element={<Navbar />}>
-                <Route index element={<Home />} />
-                <Route
-                    path="/product/detail"
-                    element={<ProductDetail />}
-                ></Route>
-            </Route>
-        </Routes>
+        <>
+            <Toaster
+                toastOptions={{
+                    duration: 3000,
+                }}
+            />
+            {IS_ADMIN ? <AdminRoutes /> : <WebRoutes />}
+        </>
     );
 }
 

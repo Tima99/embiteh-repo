@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import ReactLogo from "@/assets/react.svg";
 import Logo from "@/assets/Logo.jpeg";
 import { Button } from "@/shadcn/components/ui/button";
 import {

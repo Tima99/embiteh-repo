@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import colors from 'tailwindcss/colors'
+
 // eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ["class"],
@@ -18,6 +20,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'check-icon': "url('https://img.icons8.com/ios-filled/50/40C057/approval.png')"
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -52,6 +57,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        shad: colors.gray
       },
       borderRadius: {
         lg: "var(--radius)",
