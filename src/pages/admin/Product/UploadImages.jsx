@@ -8,6 +8,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
+  
 } from "@/shadcn/components/ui/sheet";
 import serializeForm from "@/utils/serializeForm";
 import { useForm } from "react-hook-form";
@@ -15,7 +16,7 @@ import toast from "react-hot-toast";
 
 const UploadImages = ({ children, productId, setSortedImages }) => {
   const form = useForm();
-  const { register } = form;
+  const { register, formState: { isSubmitting } } = form;
   async function onSubmit(data) {
     try {
       const formData = serializeForm(data);
@@ -57,7 +58,7 @@ const UploadImages = ({ children, productId, setSortedImages }) => {
           />
         </div>
 
-        <Button onClick={form.handleSubmit(onSubmit)}>Upload</Button>
+        <Button onClick={form.handleSubmit(onSubmit)} disabled={isSubmitting}>Upload</Button>
       </SheetContent>
     </Sheet>
   );

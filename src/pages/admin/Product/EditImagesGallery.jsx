@@ -22,9 +22,10 @@ import SortableItem from "@/components/SortableItem";
 import api from "@/services/api";
 import { Button } from "@/shadcn/components/ui/button";
 import toast from "react-hot-toast";
-import { IoMdAddCircle } from "react-icons/io";
 import UploadImages from "./UploadImages";
 import { SheetTrigger } from "@/shadcn/components/ui/sheet";
+import { FcAddImage } from "react-icons/fc";
+
 
 const EditImagesGallery = () => {
   const { productId } = useParams();
@@ -109,8 +110,8 @@ const EditImagesGallery = () => {
               productId={productId}
               setSortedImages={setSortedImages}
             >
-              <SheetTrigger className="absolute top-0 right-12 -translate-y-1/2 cursor-pointer">
-                <IoMdAddCircle size={30} />
+              <SheetTrigger className="absolute -top-2 right-12 -translate-y-1/2 cursor-pointer">
+                <FcAddImage size={50} title="Add Images"/>
               </SheetTrigger>
             </UploadImages>
 
