@@ -5,10 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import api from "@/services/api";
 import { toast } from "react-hot-toast";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import INPUT_TYPES from "@/constants/InputTypes";
 import FormUI from "@/components/FormUI";
 import TagsInput from "react-tagsinput";
+import serializeForm from "@/utils/serializeForm";
 
 const FORM_UI = [
     {
@@ -132,10 +133,10 @@ const formSchema = z
         label: z.string().min(1, { message: "Product label is required." }),
         currency: z.string().min(1, { message: "Product currency is required." }),
         tags: z.optional(z.array(z.string())),
-        images: z
-            .instanceof(FileList)
-            .refine(files => [...files].every(file => file.type.startsWith("image")), "Only images allowed.")
-    })
+        images: z.optional(z.instanceof(FileList)
+            .refine(files => [...files].every(file => file.type.startsWith("image")), "Only images allowed."))
+        }
+        )
     .refine(
         (schema) => {
             return (
@@ -150,9 +151,10 @@ const formSchema = z
     );
 
 const Add = () => {
+    const {state: editProduct} = useLocation()
     const form = useForm({
         resolver: zodResolver(formSchema),
-        defaultValues: {
+        defaultValues: editProduct ? {...editProduct, images: undefined} :{
             name: "",
             description: "",
             price: "",
@@ -168,21 +170,28 @@ const Add = () => {
 
     async function onSubmit(values) {
         try {
-            await api.post("/product", {...values}, {
-                headers: {
-                    "content-type": "multipart/form-data",
-                }
-            });
-            toast.success("Created Successfully");
+            if(editProduct){
+                await api.put(`/product/${editProduct?._id}`, {...values, images: undefined});
+                toast.success("Updated Successfully");
+            }else{
+                await api.post("/product", serializeForm(values), {
+                    headers: {
+                        "content-type": "multipart/form-data",
+                    }
+                });
+                toast.success("Created Successfully");
+            }
             navigate(-1);
         } catch (message) {
             toast.error(message);
         }
     }
 
+    console.log(form.getValues("tags"));
+
     return (
         <>
-            <FormUI form={form} onSubmit={onSubmit} FORM_UI={FORM_UI}></FormUI>
+            <FormUI form={form} onSubmit={onSubmit} FORM_UI={editProduct ? FORM_UI.slice(0, FORM_UI.length - 1) : FORM_UI}></FormUI>
         </>
     );
 };

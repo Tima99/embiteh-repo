@@ -19,6 +19,7 @@ const AdminRoutes = () => {
                 <Route path="masters/productLabel/add" element={<AddProductLabelMaster />} />
                 <Route path="productManagement/manageProduct" element={<ProductList />} />
                 <Route path="productManagement/manageProduct/add" element={<AddProduct />} />
+                <Route path="productManagement/manageProduct/edit" element={<AddProduct />} />
                 <Route path="productManagement/manageProduct/:productId/editImageGallery" element={<EditImagesGallery />} />
             </Route>
         </Routes>

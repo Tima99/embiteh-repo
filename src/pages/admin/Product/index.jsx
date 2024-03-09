@@ -98,10 +98,20 @@ const Product = () => {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
+                onClick={() => {
+                  navigate("/admin/productManagement/manageProduct/edit", {
+                    state: doc,
+                  });
+                }}
+              >
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
                 onClick={() => navigate(`${doc?._id}/editImageGallery`)}
               >
                 Edit Image Gallery
               </DropdownMenuItem>
+
               <DropdownMenuSeparator />
 
               <UploadImages productId={doc?._id}>
@@ -109,7 +119,6 @@ const Product = () => {
                   <DropdownMenuText>Upload Images</DropdownMenuText>
                 </SheetTrigger>
               </UploadImages>
-              {/* <DropdownMenuItem>View payment details</DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
         );
