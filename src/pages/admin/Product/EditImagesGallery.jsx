@@ -20,6 +20,9 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import SortableItem from "@/components/SortableItem";
+import api from "@/services/api";
+import { Button } from "@/shadcn/components/ui/button";
+import toast from "react-hot-toast";
 
 const EditImagesGallery = () => {
   const { productId } = useParams();
@@ -60,8 +63,21 @@ const EditImagesGallery = () => {
     }
   };
 
+  async function handleImageSubmit(e) {
+    try {
+      e.preventDefault();
+      const data = await api.put(`/product/${productId}`, {
+        imagesOrder: sortedImages,
+      });
+      toast.success(data?.message)
+    } catch (error) {
+      console.log(error);
+      toast.error("Try Again")
+    }
+  }
+
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {isLoading ? (
         <Loader />
       ) : (
@@ -79,7 +95,7 @@ const EditImagesGallery = () => {
               {sortedImages.map((id) => (
                 <SortableItem key={id} id={id} handle={true} value={id} />
               ))}
-              <DragOverlay>
+              {/* <DragOverlay>
                 {activeId ? (
                   <div
                     style={{
@@ -92,12 +108,13 @@ const EditImagesGallery = () => {
                     className="border p-3 relative flex items-center justify-center group"
                   ></div>
                 ) : null}
-              </DragOverlay>
+              </DragOverlay> */}
             </SortableContext>
           </div>
         </DndContext>
       )}
-    </>
+      <Button onClick={handleImageSubmit} className="w-max m-auto">Submit</Button>
+    </div>
   );
 };
 
