@@ -11,7 +11,6 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragOverlay,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -23,6 +22,9 @@ import SortableItem from "@/components/SortableItem";
 import api from "@/services/api";
 import { Button } from "@/shadcn/components/ui/button";
 import toast from "react-hot-toast";
+import { IoMdAddCircle } from "react-icons/io";
+import UploadImages from "./UploadImages";
+import { SheetTrigger } from "@/shadcn/components/ui/sheet";
 
 const EditImagesGallery = () => {
   const { productId } = useParams();
@@ -31,7 +33,7 @@ const EditImagesGallery = () => {
     autoFetchOnce: true,
   });
   const [sortedImages, setSortedImages] = useState([]);
-  const [activeId, setActiveId] = useState(null);
+  const [uploadedImages, setUploadedImages] = useState([]);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -45,12 +47,7 @@ const EditImagesGallery = () => {
     setSortedImages(product.images);
   }, [product?.images]);
 
-  const handleDragStart = (event) => {
-    setActiveId(event.active.id);
-  };
-
   const handleDragEnd = (event) => {
-    setActiveId(null);
     const { active, over } = event;
 
     if (active.id !== over.id) {
@@ -66,13 +63,34 @@ const EditImagesGallery = () => {
   async function handleImageSubmit(e) {
     try {
       e.preventDefault();
-      const data = await api.put(`/product/${productId}`, {
-        imagesOrder: sortedImages,
+      const formData = new FormData();
+
+      // Append imagesOrder elements individually with a consistent naming convention
+      sortedImages?.forEach((img) => {
+        const fileIndex = uploadedImages.findIndex(
+          (file) => file.index === img
+        );
+        if (fileIndex !== -1) {
+          formData.append(`imagesOrder`, "0"); // replacing image
+        } else {
+          formData.append(`imagesOrder`, img.toString());
+        }
       });
-      toast.success(data?.message)
+
+      // Append images as files
+      uploadedImages?.forEach((item) => {
+        formData.append(`images`, item.file);
+      });
+
+      const data = await api.put(`/product/${productId}`, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
+      toast.success(data?.message);
     } catch (error) {
       console.log(error);
-      toast.error("Try Again")
+      toast.error("Try Again");
     }
   }
 
@@ -85,35 +103,44 @@ const EditImagesGallery = () => {
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
-          onDragStart={handleDragStart}
         >
-          <div className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6 gap-7 bg-white py-6 px-6 border shadow-sm">
+          <div className="grid grid-cols-2 xl:grid-cols-4 2xl:grid-cols-6 gap-7 bg-white py-6 px-6 border shadow-sm relative">
+            <UploadImages
+              productId={productId}
+              setSortedImages={setSortedImages}
+            >
+              <SheetTrigger className="absolute top-0 right-12 -translate-y-1/2 cursor-pointer">
+                <IoMdAddCircle size={30} />
+              </SheetTrigger>
+            </UploadImages>
+
             <SortableContext
               items={sortedImages}
               strategy={rectSortingStrategy}
             >
-              {sortedImages.map((id) => (
-                <SortableItem key={id} id={id} handle={true} value={id} />
-              ))}
-              {/* <DragOverlay>
-                {activeId ? (
-                  <div
-                    style={{
-                      //   width: "100px",
-                      //   height: "100px",
-                      height: "100%",
-                      backgroundColor: "green",
-                      opacity: "0.05",
-                    }}
-                    className="border p-3 relative flex items-center justify-center group"
-                  ></div>
-                ) : null}
-              </DragOverlay> */}
+              {sortedImages.map((id, index) => {
+                if (id === -1) return;
+
+                return (
+                  <SortableItem
+                    key={id}
+                    id={id}
+                    handle={true}
+                    value={id}
+                    index={index}
+                    setSortedImages={setSortedImages}
+                    setUploadedImages={setUploadedImages}
+                    uploadedImages={uploadedImages}
+                  />
+                );
+              })}
             </SortableContext>
           </div>
         </DndContext>
       )}
-      <Button onClick={handleImageSubmit} className="w-max m-auto">Submit</Button>
+      <Button onClick={handleImageSubmit} className="w-max m-auto">
+        Submit
+      </Button>
     </div>
   );
 };
