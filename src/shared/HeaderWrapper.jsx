@@ -5,12 +5,16 @@ import React from "react";
 
 const HeaderWrapper = (
     WrappedComponent,
-    { isBack = false, btnText = "Create", to = "add", isBtn = false }
+    { isBack = false, btnText = "Create", to = "add", isBtn, subTitle } = {
+        isBack: false,
+        btnText: "Create",
+        to: "add",
+    }
 ) => {
     return () => {
         return (
             <React.Fragment>
-                <Typography.Heading isBack={isBack}>
+                <Typography.Heading isBack={isBack} subTitle={subTitle}>
                     {isBtn && (
                         <Button.Add variant="rounded" to={to}>
                             {btnText}

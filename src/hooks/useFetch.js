@@ -58,7 +58,7 @@ const useFetch = (
         }
     }, [autoFetchOnce, fetchURL]);
 
-    return [data, loading, fetchURL, setData, error];
+    return [data, loading, {fetchURL, setData, error}];
 };
 
 export default useFetch;

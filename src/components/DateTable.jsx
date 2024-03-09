@@ -64,9 +64,12 @@ function DataTable({ columns, data, isLoading, noDataMsg = "No Data Found" }) {
             <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id} className="!bg-gray-200">
-                        {headerGroup.headers.map((header) => {
+                        {headerGroup.headers.map((header, i) => {
                             return (
-                                <TableHead key={header.id}>
+                                <TableHead
+                                    key={header.id}
+                                    className={i === 0 ? "" : "text-center"}
+                                >
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
@@ -76,6 +79,7 @@ function DataTable({ columns, data, isLoading, noDataMsg = "No Data Found" }) {
                                 </TableHead>
                             );
                         })}
+                        {/* <TableHead>Action</TableHead> */}
                     </TableRow>
                 ))}
             </TableHeader>
@@ -86,14 +90,22 @@ function DataTable({ columns, data, isLoading, noDataMsg = "No Data Found" }) {
                             key={row.id}
                             data-state={row.getIsSelected() && "selected"}
                         >
-                            {row.getVisibleCells().map((cell) => (
-                                <TableCell key={cell.id}>
+                            {row.getVisibleCells().map((cell, i) => (
+                                <TableCell
+                                    key={cell.id}
+                                    className={i === 0 ? "" : "text-center"}
+                                >
                                     {flexRender(
                                         cell.column.columnDef.cell,
                                         cell.getContext()
                                     )}
                                 </TableCell>
                             ))}
+                            {/* <TableCell
+                                className={"text-center"}
+                            >
+                                hhh
+                            </TableCell> */}
                         </TableRow>
                     ))
                 ) : (

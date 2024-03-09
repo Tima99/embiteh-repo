@@ -5,7 +5,8 @@ const InputTypes = {
     RADIO: "radio",
     CHECKBOX: "checkbox",
     NUMBER: "number",
-    TEXTAREA: "textarea"
+    TEXTAREA: "textarea",
+    FILE: "file"
 };
 
 export default InputTypes;
