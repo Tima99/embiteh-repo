@@ -9,7 +9,7 @@ const WebRoutes = () => {
             <Route path="/" element={<Navbar />}>
                 <Route index element={<Home />} />
                 <Route
-                    path="/product/detail"
+                    path="/product/detail/:id"
                     element={<ProductDetail />}
                 ></Route>
             </Route>
