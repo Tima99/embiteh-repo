@@ -53,7 +53,7 @@ function AdminLayout() {
             </Menubar>
 
             <div className="flex-1 ">
-                <div className="flex py-[0.85rem] border-b w-full gap-4 bg-white justify-end px-6">
+                <div className="flex py-[0.85rem] 2xl:py-[0.78rem] border-b w-full gap-4 bg-white justify-end px-6">
                     <Menubar className="border-none active:bg-none">
                         <MenubarMenu>
                             <MenubarTrigger className="shadow-none bg-none">
