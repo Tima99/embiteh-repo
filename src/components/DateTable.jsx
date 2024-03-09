@@ -25,13 +25,13 @@ function DataTable({ columns, data, isLoading, noDataMsg = "No Data Found" }) {
                     cell: (info) => {
                         const className =
                             info.getValue() === "Active"
-                                ? "border-green-700 text-green-700  bg-green-300"
-                                : "border-yellow-700 text-yellow-700  bg-yellow-300";
+                                ? "border-green-700 text-green-600  bg-green-300"
+                                : "border-yellow-500 text-yellow-500  bg-yellow-200";
 
                         return (
                             <span
                                 className={cn(
-                                    "border p-4 py-2 rounded-full font-bold ",
+                                    "border p-4 py-[8px] rounded-full font-bold ",
                                     className
                                 )}
                             >

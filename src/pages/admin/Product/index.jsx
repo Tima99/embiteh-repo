@@ -17,9 +17,11 @@ import { Button } from "@/shadcn/components/ui/button";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import UploadImages from "./UploadImages";
 import { SheetTrigger } from "@/shadcn/components/ui/sheet";
+import api from "@/services/api";
+import toast from "react-hot-toast";
 
 const Product = () => {
-  const [products, isLoading] = useFetch("/product", {
+  const [products, isLoading, { fetchURL: fetchProducts }] = useFetch("/product", {
     extractKey: "products",
     autoFetchOnce: true,
   });
@@ -79,8 +81,8 @@ const Product = () => {
       },
     },
     {
-      accessorKey: "tags",
-      header: "Tags",
+      accessorKey: "status",
+      header: "Status",
     },
     {
       id: "actions",
@@ -110,6 +112,21 @@ const Product = () => {
                 onClick={() => navigate(`${doc?._id}/editImageGallery`)}
               >
                 Edit Image Gallery
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={async () => {
+                  try {
+                    await api.put(`/product/${doc?._id}`, {
+                      status: doc.status === "Active" ? "Inactive" : "Active",
+                    });
+                    fetchProducts(null, () => toast.success("Changed Status"));
+                  } catch (error) {
+                    console.log(error);
+                    toast.error("Failed");
+                  }
+                }}
+              >
+                Make {doc.status === "Active" ? "Inactive" : "Active"}
               </DropdownMenuItem>
 
               <DropdownMenuSeparator />
