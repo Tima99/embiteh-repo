@@ -35,7 +35,7 @@ const FORM_UI = [
     },
     {
         type: INPUT_TYPES.NUMBER,
-        label: "Discount Price",
+        label: "Discount Amount",
         name: "discountPrice",
         placeholder: "Enter product dicount price",
         id: 4,

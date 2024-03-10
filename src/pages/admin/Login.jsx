@@ -16,6 +16,9 @@ import api from "@/services/api";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {
+    Form
+} from "@/shadcn/components/ui/form";
 
 const schema = z.object({
     email: z.string().email("Please enter a valid email address"),
@@ -63,6 +66,7 @@ export default function Component() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
+                    <Form {...form}>
                     <form onSubmit={handleSubmit(submitHandler)} >
                         <div className="space-y-4">
                             <div className="space-y-2">
@@ -101,6 +105,7 @@ export default function Component() {
                             </Button>
                         </div>
                     </form>
+                    </Form>
                 </CardContent>
             </Card>
         </div>

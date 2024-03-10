@@ -34,7 +34,7 @@ const ProductDetail = () => {
     category: "electronics",
     sku: "BE45VGTRK",
     price: product && product.price - product.discountPrice,
-    previousPrice: 599,
+    previousPrice: product && product.price,
     description: product?.description,
     size: ["XS", "S", "M", "L", "XL"],
     color: ["bg-gray-500", "bg-violet-600", "bg-red-600"],
@@ -142,7 +142,7 @@ const ProductDetail = () => {
         </div>
         <div className="mt-7 flex items-center gap-4 sm:gap-6 ">
           <Button
-            className="flex h-12 sm:w-1/3 items-center justify-center  text-white duration-100 hover:bg-blue-800 whitespace-nowrap"
+            className="flex h-12 sm:max-md:w-1/3 items-center justify-center  text-white duration-100 hover:bg-blue-800 whitespace-nowrap"
             onClick={(e) => {
               e.stopPropagation();
               toast({
@@ -156,7 +156,7 @@ const ProductDetail = () => {
             Add to cart
           </Button>
           <Button
-            className="flex h-12 sm:w-1/3 items-center justify-center bg-amber-400 duration-100 hover:bg-yellow-300 text-black"
+            className="flex h-12 sm:max-md:w-1/3  bg-amber-400 duration-100 hover:bg-yellow-300 text-black"
             onClick={(e) => {
               e.stopPropagation();
               toast({

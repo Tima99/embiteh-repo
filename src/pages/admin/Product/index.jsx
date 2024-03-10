@@ -68,7 +68,7 @@ const Product = () => {
     },
     {
       accessorKey: "discountPrice",
-      header: "Discount Price",
+      header: "Discount Amount",
     },
     {
       accessorKey: "quantity",
