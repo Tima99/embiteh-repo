@@ -1,34 +1,23 @@
-import { Button } from "@/shadcn/components/ui/button";
-import { useToast } from "@/shadcn/components/ui/use-toast";
-import { ToastAction } from "@/shadcn/components/ui/toast";
-import { SkeletonCard } from "./SkeletonCard";
-import { Skeleton } from "@/shadcn/components/ui/skeleton";
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({
   images,
   name,
-  description,
-  price,
-  discountPrice,
-  currency,
   _id
 }) => {
-  const { toast } = useToast();
   // const showSkeleton  = useRef(Math.random() > 0.5)
   const navigate = useNavigate();
 
   return (
     <>
       <div
-        className="max-w-sm mx-auto w-[98%] sm:w-full bg-white rounded-xl overflow-hidden shadow-md"
+        className="max-w-[300px] w-[98%] sm:w-full bg-white rounded-md overflow-hidden shadow-md border border-gray-100"
         onClick={() => {
           navigate(`/product/detail/${_id}`);
         }}
       >
         <img
-          className="w-full h-48 object-cover object-center"
+          className="w-full h-44 object-cover object-center"
           src={
             images?.length > 0
               ? `${import.meta.env.VITE_ASSETS_URL}/${images[0]}`
@@ -36,14 +25,14 @@ const ProductCard = ({
           }
           alt="Product Image"
         />
-        <div className="p-6">
-          <h2 className="text-xl font-semibold mb-2 hover:underline hover:cursor-pointer">
+        <div className="p-6 pb-2">
+          <h2 className="text-lg font-semibold mb-1 hover:underline hover:cursor-pointer">
             {name}
           </h2>
-          <p className="text-gray-600 text-sm pb-1">{description}</p>
+          {/* <p className="text-gray-600 text-sm pb-1">{description ? description : <>&nbsp;</>}</p> */}
           {/* <SkeletonCard /> */}
 
-          <div className="mt-4">
+          {/* <div className="mt-4">
             <span className="text-gray-700 text-lg font-bold">
               {currency === "dollar" ? "$ " : "₹ "}
               {price - (discountPrice || 0)}
@@ -61,7 +50,7 @@ const ProductCard = ({
             >
               Add to Cart
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

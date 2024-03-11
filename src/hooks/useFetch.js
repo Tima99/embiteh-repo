@@ -22,7 +22,7 @@ const useFetch = (
             }
 
             if (loading) return;
-            Object.keys(cacheData)?.length <= 0 && setLoading(true);
+            Object.keys(cacheData.current)?.length <= 0 && setLoading(true);
 
             // check cache for already fetch data
             if (cacheData.current?.[id]) {

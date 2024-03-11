@@ -19,13 +19,13 @@ const ProductRow = ({ label }) => {
     }
 
     return (
-        <>
-            <div className="flex justify-between px-6 items-center xl:px-16">
-                <span className="text-xl font-bold xl:text-3xl text-slate-900 ">
+        <div className="px-6 xl:px-16">
+            <div className="flex justify-between items-center">
+                <span className="text-xl font-semibold xl:text-2xl text-slate-900 text-primary">
                     {label.name}
                 </span>
                 <span
-                    className="2xl:hidden cursor-pointer translate-y-1/4"
+                    className="2xl:hidden cursor-pointer "
                     onClick={() => setIsCraouselView((prev) => !prev)}
                     title={!isCarouselView ? "Carousel View" : "List View"}
                 >
@@ -47,7 +47,7 @@ const ProductRow = ({ label }) => {
                 </span>
             </div>
             {!isCarouselView ? (
-                <div className="flex gap-6 flex-wrap px-6 py-6">
+                <div className="grid xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-6 py-6">
                     {label.products.map((product) => {
                         return (
                             <ProductCard
@@ -58,7 +58,7 @@ const ProductRow = ({ label }) => {
                     })}
                 </div>
             ) : (
-                <div className="px-6 py-6 xl:px-16">
+                <div className="py-6">
                     <Carousel
                         opts={{
                             align: "start",
@@ -70,7 +70,7 @@ const ProductRow = ({ label }) => {
                                 return (
                                     <CarouselItem
                                         key={product._id}
-                                        className="xl:basis-1/3 sm:basis-1/2 md:basis-1/3"
+                                        className="xl:basis-1/4 sm:basis-1/2 md:basis-1/3"
                                     >
                                         <ProductCard
                                             key={product._id}
@@ -85,7 +85,7 @@ const ProductRow = ({ label }) => {
                     </Carousel>
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
