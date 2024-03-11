@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     // Configure baseURL and other options
-    baseURL: "http://localhost:7000/api",
+    baseURL: import.meta.env.VITE_BACKEND_API,
 });
 
 // Add a response interceptor
