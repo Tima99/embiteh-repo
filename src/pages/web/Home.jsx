@@ -4,12 +4,9 @@ import Testimonials from "@/components/Testimonials";
 import useFetch from "@/hooks/useFetch";
 import ProductRow from "./ProductRow";
 import { SkeletonCard } from "@/components/SkeletonCard";
-import EmblaCarousel from "@/components/Carousel/EmblaCarousel";
 // import CategoryCard from "@/components/CategoryCard";
 
-const OPTIONS = { loop: true };
-const SLIDE_COUNT = 5;
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
 
 export default function Home() {
   const [labels, isLoading] = useFetch("/product/by/labels", {
@@ -19,7 +16,6 @@ export default function Home() {
 
   return (
     <div>
-      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
 
       <HeroSection></HeroSection>
 

@@ -39,7 +39,7 @@ const EmblaCarousel = (props) => {
   } = usePrevNextButtons(emblaApi, onNavButtonClick);
 
   return (
-    <section className="embla relative h-screen max-h-[600px]">
+    <section className="embla relative h-screen max-h-[70vh]">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container h-full">
           {slides.map((index) => (
