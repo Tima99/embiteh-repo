@@ -7,7 +7,7 @@ import "react-rater/lib/react-rater.css";
 import { useToast } from "@/shadcn/components/ui/use-toast";
 import { ToastAction } from "@/shadcn/components/ui/toast";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useFetch from "@/hooks/useFetch";
 
 const ProductDetail = () => {
@@ -16,6 +16,8 @@ const ProductDetail = () => {
   const [product, isLoading, { fetchURL }] = useFetch("/product", {
     extractKey: "product",
   });
+
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
     fetchURL(id);
@@ -74,6 +76,9 @@ const ProductDetail = () => {
             </p>
           </div>
         </div>
+        <p className="pt-3 text-md lg:pt-0 text-gray-700">
+          {productDetailItem.description}
+        </p>
         <p className="mt-5 font-bold">
           Availability:{" "}
           {productDetailItem.availability ? (
@@ -82,7 +87,7 @@ const ProductDetail = () => {
             <span className="text-red-600">Expired</span>
           )}
         </p>
-        <p className="font-bold">
+        {/* <p className="font-bold">
           Brand: <span className="font-normal">{productDetailItem.brand}</span>
         </p>
         <p className="font-bold">
@@ -91,7 +96,7 @@ const ProductDetail = () => {
         </p>
         <p className="font-bold">
           SKU: <span className="font-normal">{productDetailItem.sku}</span>
-        </p>
+        </p> */}
         <p className="mt-4 text-4xl font-bold text-violet-900">
           {product && (product.currency === "dollar" ? "$ " : "₹ ")}
           {productDetailItem.price}{" "}
@@ -102,7 +107,7 @@ const ProductDetail = () => {
         <p className="pt-5 text-sm leading-5 text-gray-500">
           {productDetailItem.description}
         </p>
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <p className="pb-2 text-xs text-gray-500">Size</p>
           <div className="flex gap-1">
             {productDetailItem.size.map((x, index) => {
@@ -116,8 +121,8 @@ const ProductDetail = () => {
               );
             })}
           </div>
-        </div>
-        <div className="mt-6">
+        </div> */}
+        {/* <div className="mt-6">
           <p className="pb-2 text-xs text-gray-500">Color</p>
           <div className="flex gap-1">
             {productDetailItem.color.map((x, index) => {
@@ -129,15 +134,15 @@ const ProductDetail = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
         <div className="mt-6">
           <p className="pb-2 text-xs text-gray-500">Quantity</p>
           <div className="flex">
-            <button className={`${plusMinuceButton}`}>&minus;</button>
+            <button className={`${plusMinuceButton}`} onClick={() => setQuantity(prev => prev <= 0 ? 0 : prev - 1)}>&minus;</button>
             <div className="flex h-8 w-8 cursor-text items-center justify-center border-t border-b active:ring-gray-500">
-              1
+              {quantity}
             </div>
-            <button className={`${plusMinuceButton}`}> +</button>
+            <button className={`${plusMinuceButton}`} onClick={() => setQuantity(prev => prev + 1)}> +</button>
           </div>
         </div>
         <div className="mt-7 flex items-center gap-4 sm:gap-6 ">
