@@ -15,7 +15,7 @@ import {
 import { Button } from "@/shadcn/components/ui/button";
 
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
-import UploadImages from "./UploadImages";
+import UploadImages from "@/components/UploadImages";
 import { SheetTrigger } from "@/shadcn/components/ui/sheet";
 import api from "@/services/api";
 import toast from "react-hot-toast";

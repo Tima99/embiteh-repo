@@ -28,6 +28,11 @@ function AdminLayout() {
                                 Manage Label Master
                             </Link>
                         </MenubarItem>
+                        <MenubarItem>
+                            <Link to="masters/heroBanner">
+                                Manage Hero Master
+                            </Link>
+                        </MenubarItem>
                         {/* <MenubarSeparator />
                         <MenubarSub>
                             <MenubarSubTrigger>Share</MenubarSubTrigger>

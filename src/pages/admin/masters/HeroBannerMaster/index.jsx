@@ -1,4 +1,4 @@
-import React from 'react'
+import HeaderWrapper from '@/shared/HeaderWrapper'
 
 const HeroBannerMaster = () => {
   return (
@@ -6,4 +6,6 @@ const HeroBannerMaster = () => {
   )
 }
 
-export default HeroBannerMaster
+export default HeaderWrapper(HeroBannerMaster, {
+  isBtn: true
+})
