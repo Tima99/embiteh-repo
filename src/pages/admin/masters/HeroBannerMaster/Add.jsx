@@ -121,6 +121,13 @@ const EditImagesGallery = () => {
                                                 type="text"
                                                 {...register("name")}
                                             />
+                                            <div className="mt-2"></div>
+                                            <Label htmlFor="name">Description</Label>
+                                            <Input
+                                                id="name"
+                                                type="text"
+                                                {...register("description")}
+                                            />
                                         </div>
                                     );
                                 }}
