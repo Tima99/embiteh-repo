@@ -47,7 +47,7 @@ const ProductRow = ({ label }) => {
                 </span>
             </div>
             {!isCarouselView ? (
-                <div className="grid xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-6 py-6">
+                <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-6 py-6 max-md:place-items-center">
                     {label.products.map((product) => {
                         return (
                             <ProductCard
@@ -58,10 +58,10 @@ const ProductRow = ({ label }) => {
                     })}
                 </div>
             ) : (
-                <div className="py-6">
+                <div className="py-6 ">
                     <Carousel
                         opts={{
-                            align: "start",
+                            align: "center",
                             loop: true,
                         }}
                     >
@@ -70,7 +70,7 @@ const ProductRow = ({ label }) => {
                                 return (
                                     <CarouselItem
                                         key={product._id}
-                                        className="xl:basis-1/4 sm:basis-1/2 md:basis-1/3"
+                                        className="2xl:basis-1/5 xl:basis-1/4 sm:basis-1/2 md:basis-1/3 "
                                     >
                                         <ProductCard
                                             key={product._id}

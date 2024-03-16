@@ -11,7 +11,7 @@ const ProductCard = ({
   return (
     <>
       <div
-        className="max-w-[300px] w-[98%] sm:w-full bg-white rounded-md overflow-hidden shadow-md border border-gray-100"
+        className="md:max-w-[300px] w-[100%] sm:w-full bg-white rounded-md overflow-hidden shadow-md border border-gray-100"
         onClick={() => {
           navigate(`/product/detail/${_id}`);
         }}
