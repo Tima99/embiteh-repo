@@ -39,9 +39,13 @@ const Product = () => {
               <img
                 src={`${import.meta.env.VITE_ASSETS_URL}/${images[0]}`}
                 alt=""
-                className="w-10"
+                className="hidden"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
+                }}
+                onLoad={(e) => {
+                  e.currentTarget.style.width = "40px";
+                  e.currentTarget.style.display = "flex";
                 }}
               />
             )}
