@@ -78,6 +78,10 @@ const EditImagesGallery = () => {
         }
       });
 
+      if(sortedImages?.length === 1){
+        formData.append('imagesOrder', null)
+      }
+
       // Append images as files
       uploadedImages?.forEach((item) => {
         formData.append(`images`, item.file);
