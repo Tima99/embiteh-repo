@@ -13,7 +13,7 @@ import serializeForm from "@/utils/serializeForm";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const UploadImages = ({ children, id, setSortedImages, postUrl, cb, UI }) => {
+const UploadImages = ({ children, productId, setSortedImages, postUrl, cb, UI }) => {
     const form = useForm();
     const {
         register,
@@ -25,9 +25,10 @@ const UploadImages = ({ children, id, setSortedImages, postUrl, cb, UI }) => {
             const formData = serializeForm(data);
 
             let resData = null;
-            if (id) {
+            
+            if (productId) {
                 resData = await api.patch(
-                    `/product/upload/images/${id}`,
+                    `/product/upload/images/${productId}`,
                     formData,
                     {
                         headers: {
@@ -70,10 +71,10 @@ const UploadImages = ({ children, id, setSortedImages, postUrl, cb, UI }) => {
                 </SheetHeader>
                 {typeof UI === "function" && UI(register)}
 
-                <div className="grid w-full max-w-sm items-center gap-1.5 my-8">
+                <div className="grproductId w-full max-w-sm items-center gap-1.5 my-8">
                     <Label htmlFor="picture">Picture</Label>
                     <Input
-                        id="picture"
+                        productId="picture"
                         type="file"
                         multiple={true}
                         {...register("images")}
