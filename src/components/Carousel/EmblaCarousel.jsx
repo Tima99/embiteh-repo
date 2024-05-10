@@ -11,7 +11,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import "./css/embla.css";
 
 const EmblaCarousel = (props) => {
-  const { slides, options } = props;
+  const { slides, options, ...rest } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()]);
 
   const onNavButtonClick = useCallback((emblaApi) => {
@@ -39,11 +39,11 @@ const EmblaCarousel = (props) => {
   } = usePrevNextButtons(emblaApi, onNavButtonClick);
 
   return (
-    <section className="embla relative h-screen max-h-[70vh]">
+    <section className={`embla relative h-screen max-h-[70vh] ${rest.rootStyle}`}>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container h-full">
           {slides.map((index) => (
-            <div className="embla__slide bg-green-300 flex items-center justify-center" key={index}>
+            <div className="embla__slide bg-gray-300 flex items-center justify-center" key={index}>
               <div className="embla__slide__number">{index + 1}</div>
             </div>
           ))}

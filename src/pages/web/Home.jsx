@@ -6,8 +6,6 @@ import ProductRow from "./ProductRow";
 import { SkeletonCard } from "@/components/SkeletonCard";
 // import CategoryCard from "@/components/CategoryCard";
 
-
-
 export default function Home() {
   const [labels, isLoading] = useFetch("/product/by/labels", {
     extractKey: "labels",
@@ -16,8 +14,7 @@ export default function Home() {
 
   return (
     <div>
-
-      <HeroSection></HeroSection>
+      <HeroSection rootStyle={"mb-8"}></HeroSection>
 
       {isLoading && (
         <div className="px-6 xl:px-16 gap-6 py-6 grid xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 grid-cols-1">
